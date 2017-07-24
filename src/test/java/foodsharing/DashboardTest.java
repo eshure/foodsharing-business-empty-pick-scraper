@@ -30,7 +30,7 @@ public class DashboardTest {
     public void given_dashboard_when_navigating_to_businesses_expect_not_null() {
         DashBoard dashboard = login_page.login_as(new Esteban());
         dashboard.navigate_to_businesses();
-        BusinessPage business_page = new BusinessPage(dashboard.browser());
-        assertNotNull(business_page);
+        BusinessListPage business_list = new BusinessListPage(dashboard.browser());
+        assertNotNull(business_list);
     }
 }

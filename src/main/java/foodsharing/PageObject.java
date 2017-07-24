@@ -26,23 +26,22 @@ abstract class PageObject {
     }
 
     boolean has(String cssSelector) {
-        By by = By.cssSelector(cssSelector);
-        wait_for_element(by);
-        List<WebElement> elements = findElements(by);
+        wait_for_element(cssSelector);
+        List<WebElement> elements = findElements(cssSelector);
         return ! elements.isEmpty();
     }
 
-    WebElement findElement(By by) {
-        wait_for_element(by);
-        List<WebElement> elements = findElements(by);
-        return elements.get(0);
+    List<WebElement> findElements(String cssSelector) {
+        wait_for_element(cssSelector);
+        return browser.driver().findElements(By.cssSelector(cssSelector));
     }
 
-    private List<WebElement> findElements(By by) {
-        return browser.driver().findElements(by);
+    WebElement findElement(String cssSelector) {
+        return findElements(cssSelector).get(0);
     }
 
-    private void wait_for_element(By by) {
+    private void wait_for_element(String cssSelector) {
+        By by = By.cssSelector(cssSelector);
         long start_waiting = System.currentTimeMillis();
         wait.until(ExpectedConditions.elementToBeClickable(by));
         System.out.println("Waited for " + by + " " + (System.currentTimeMillis() - start_waiting) + " ms.");
@@ -50,14 +49,11 @@ abstract class PageObject {
 
 
     WebElement into(String css_selector) {
-        By by = By.cssSelector(css_selector);
-        WebElement element = findElement(by);
-        return element;
+        return findElement(css_selector);
     }
 
     void click_on(String css_selector) {
-        By by = By.cssSelector(css_selector);
-        findElement(by).click();
+        findElement(css_selector).click();
     }
 
     abstract String title();
