@@ -2,7 +2,7 @@ package foodsharing;
 
 import org.openqa.selenium.By;
 import selenium.Browser;
-import user.Authenticate;
+import user.User;
 
 class LoginPage extends PageObject {
 
@@ -24,10 +24,12 @@ class LoginPage extends PageObject {
         return "https://foodsharing.de/";
     }
 
-    void login_as(Authenticate user) {
+    DashBoard login_as(User user) {
+        System.out.println(user);
         enter_email_adress_to(user.email());
         enter_password(user.password());
         click_on(submit);
+        return new DashBoard(browser());
     }
 
     private void enter_email_adress_to(String email) {

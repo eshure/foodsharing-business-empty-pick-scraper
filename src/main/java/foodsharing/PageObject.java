@@ -21,6 +21,10 @@ abstract class PageObject {
         wait = new WebDriverWait(browser.driver(), timeout_in_seconds);
     }
 
+    Browser browser() {
+        return browser;
+    }
+
     boolean has(By by) {
         wait_for_element(by);
         List<WebElement> elements = findElements(by);

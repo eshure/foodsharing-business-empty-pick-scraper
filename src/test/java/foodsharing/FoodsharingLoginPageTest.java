@@ -32,7 +32,8 @@ public class FoodsharingLoginPageTest {
     }
 
     @Test
-    public void given_login_page_when_entering_credentials_then_expect_successful_login() {
-        login_page.login_as(new Esteban());
+    public void given_login_page_when_login_as_esteban_then_expect_dashboard_page_title() {
+        DashBoard dashboard = login_page.login_as(new Esteban());
+        assertEquals(dashboard.title(), browser.title());
     }
 }

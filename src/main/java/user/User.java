@@ -1,10 +1,10 @@
 package user;
 
-public abstract class Authenticate {
+public abstract class User {
     private final String email;
     private final String password;
 
-    Authenticate(String email, String password) {
+    User(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -15,5 +15,10 @@ public abstract class Authenticate {
 
     public String password() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return email + " " + password;
     }
 }
