@@ -15,4 +15,8 @@ public class BusinessPage extends PageObject{
     String title() {
         return title;
     }
+
+    public boolean contains_cooperating_businesses() {
+        return false;
+    }
 }

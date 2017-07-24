@@ -8,6 +8,7 @@ import selenium.Firefox;
 import user.Esteban;
 
 import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
 
 public class BusinessPageTest {
 
@@ -31,5 +32,6 @@ public class BusinessPageTest {
         DashBoard dashboard = login_page.login_as(new Esteban());
         dashboard.navigate_to_businesses();
         BusinessPage business_page = new BusinessPage(dashboard.browser());
+        assertTrue(business_page.contains_cooperating_businesses());
     }
 }
