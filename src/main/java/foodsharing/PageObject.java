@@ -47,14 +47,21 @@ abstract class PageObject {
         System.out.println("Waited for " + by + " " + (System.currentTimeMillis() - start_waiting) + " ms.");
     }
 
-    WebElement into(By input_email) {
-        WebElement element = findElement(input_email);
+
+    WebElement into(String css_selector) {
+        By by = By.cssSelector(css_selector);
+        WebElement element = findElement(by);
         return element;
     }
 
-    void click_on(By by) {
+    void click_on(String css_selector) {
+        By by = By.cssSelector(css_selector);
         findElement(by).click();
     }
 
     abstract String title();
+
+    public void navigate_to(String url) {
+        browser.navigate_to(url);
+    }
 }

@@ -9,7 +9,7 @@ import user.Esteban;
 
 import static junit.framework.TestCase.assertNotNull;
 
-public class DashboardTest {
+public class BusinessPageTest {
 
     private Browser browser;
     private LoginPage login_page;
@@ -27,10 +27,9 @@ public class DashboardTest {
     }
 
     @Test
-    public void given_dashboard_when_navigating_to_businesses_expect_not_null() {
+    public void given_businesspage_when_contains_green_businesses_then_expect_more_than_extract_first() {
         DashBoard dashboard = login_page.login_as(new Esteban());
         dashboard.navigate_to_businesses();
         BusinessPage business_page = new BusinessPage(dashboard.browser());
-        assertNotNull(business_page);
     }
 }

@@ -23,7 +23,7 @@ public class FoodsharingLoginPageTest {
 
     @After
     public void after() {
-//        browser.quit();
+        browser.quit();
     }
 
     @Test

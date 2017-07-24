@@ -1,15 +1,14 @@
 package foodsharing;
 
-import org.openqa.selenium.By;
 import selenium.Browser;
 import user.User;
 
 class LoginPage extends PageObject {
 
     private static final String title = "foodsharing | Restlos glücklich!";
-    private static final By input_email = By.cssSelector("input[name='email_adress'][type='email']");
-    private static final By input_password = By.cssSelector("input[name='password'][type='password']");
-    private static final By submit = By.cssSelector("input[type='submit']");
+    private static final String input_email = "input[name='email_adress'][type='email']";
+    private static final String input_password = "input[name='password'][type='password']";
+    private static final String submit = "input[type='submit']";
 
     LoginPage(Browser browser) {
         super(browser);
