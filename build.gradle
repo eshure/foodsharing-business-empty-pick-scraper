@@ -23,10 +23,14 @@ ext.seleniumVersion = '2.41.0'
 
 // Cf. Maven <dependencies>
 dependencies {
-    compile group: 'junit', name: 'junit', version: junitVersion
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version:seleniumVersion
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: '3.4.0'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version:seleniumVersion
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:seleniumVersion
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
 }
 
 // A custom task to show report on tests that have run
