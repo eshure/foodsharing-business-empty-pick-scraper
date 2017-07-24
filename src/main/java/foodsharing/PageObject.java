@@ -25,7 +25,8 @@ abstract class PageObject {
         return browser;
     }
 
-    boolean has(By by) {
+    boolean has(String cssSelector) {
+        By by = By.cssSelector(cssSelector);
         wait_for_element(by);
         List<WebElement> elements = findElements(by);
         return ! elements.isEmpty();

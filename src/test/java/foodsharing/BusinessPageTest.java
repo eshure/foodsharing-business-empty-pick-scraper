@@ -33,5 +33,6 @@ public class BusinessPageTest {
         dashboard.navigate_to_businesses();
         BusinessPage business_page = new BusinessPage(dashboard.browser());
         assertTrue(business_page.contains_cooperating_businesses());
+        
     }
 }
