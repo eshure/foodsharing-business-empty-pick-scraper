@@ -1,4 +1,4 @@
-package login;
+package selenium;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 
