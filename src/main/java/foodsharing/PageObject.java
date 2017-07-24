@@ -27,6 +27,12 @@ abstract class PageObject {
         return ! elements.isEmpty();
     }
 
+    WebElement findElement(By by) {
+        wait_for_element(by);
+        List<WebElement> elements = findElements(by);
+        return elements.get(0);
+    }
+
     private List<WebElement> findElements(By by) {
         return browser.driver().findElements(by);
     }
@@ -35,6 +41,15 @@ abstract class PageObject {
         long start_waiting = System.currentTimeMillis();
         wait.until(ExpectedConditions.elementToBeClickable(by));
         System.out.println("Waited for " + by + " " + (System.currentTimeMillis() - start_waiting) + " ms.");
+    }
+
+    WebElement into(By input_email) {
+        WebElement element = findElement(input_email);
+        return element;
+    }
+
+    void click_on(By by) {
+        findElement(by).click();
     }
 
     abstract String title();
