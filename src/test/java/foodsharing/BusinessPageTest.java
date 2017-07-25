@@ -9,6 +9,7 @@ import user.Esteban;
 
 import java.util.List;
 
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
@@ -57,6 +58,17 @@ public class BusinessPageTest {
         List<Business> cooperating_businesses = business_list.get_cooperating_businesses();
         browser.navigate_to(cooperating_businesses.get(0).path());
         BusinessPage business_page = new BusinessPage(browser);
-        assertNotNull(business_page.get_open_dates());
+        List<String> open_dates = business_page.get_open_dates();
+        System.out.println(open_dates);
+        assertFalse(open_dates.isEmpty());
+    }
+
+    @Test
+    public void given_cooperating_businesses_when_navigate_to_first_found_then_create_business() {
+        List<Business> cooperating_businesses = business_list.get_cooperating_businesses();
+        browser.navigate_to(cooperating_businesses.get(0).path());
+        BusinessPage business_page = new BusinessPage(browser);
+        Business cooperating_business = business_page.create_business();
+        assertNotNull(cooperating_business);
     }
 }
