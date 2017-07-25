@@ -30,7 +30,7 @@ public class BusinessPageTest {
 
     @After
     public void after() {
-//         browser.quit();
+         browser.quit();
     }
 
     @Test
@@ -45,10 +45,18 @@ public class BusinessPageTest {
     }
 
     @Test
-    public void given_businesspage_when_cooperating_businesses_exist_then_navigat_to_first_found() {
+    public void given_cooperating_businesses_when_navigate_to_first_found_then_expect_page_title() {
         List<Business> cooperating_businesses = business_list.get_cooperating_businesses();
         browser.navigate_to(cooperating_businesses.get(0).path());
         BusinessPage business_page = new BusinessPage(browser);
         assertTrue(business_page.title().startsWith("foodsharing | Spender-Betriebe |"));
+    }
+
+    @Test
+    public void given_cooperating_businesses_when_navigate_to_first_found_then_extract_open_dates() {
+        List<Business> cooperating_businesses = business_list.get_cooperating_businesses();
+        browser.navigate_to(cooperating_businesses.get(0).path());
+        BusinessPage business_page = new BusinessPage(browser);
+        assertNotNull(business_page.get_open_dates());
     }
 }
