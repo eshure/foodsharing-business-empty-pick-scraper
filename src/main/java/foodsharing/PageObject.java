@@ -58,7 +58,11 @@ abstract class PageObject {
 
     abstract String title();
 
-    public void navigate_to(String url) {
+    void navigate_to(String url) {
         browser.navigate_to(url);
+    }
+
+    String get_current_url() {
+        return browser.driver().getCurrentUrl();
     }
 }

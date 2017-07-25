@@ -7,6 +7,7 @@ import selenium.Browser;
 import selenium.Firefox;
 import user.Esteban;
 
+import java.util.Calendar;
 import java.util.List;
 
 import static junit.framework.TestCase.assertFalse;
@@ -58,7 +59,7 @@ public class BusinessPageTest {
         List<Business> cooperating_businesses = business_list.get_cooperating_businesses();
         browser.navigate_to(cooperating_businesses.get(0).path());
         BusinessPage business_page = new BusinessPage(browser);
-        List<String> open_dates = business_page.get_open_dates();
+        List<Calendar> open_dates = business_page.get_open_dates();
         System.out.println(open_dates);
         assertFalse(open_dates.isEmpty());
     }
@@ -69,6 +70,7 @@ public class BusinessPageTest {
         browser.navigate_to(cooperating_businesses.get(0).path());
         BusinessPage business_page = new BusinessPage(browser);
         Business cooperating_business = business_page.create_business();
+        System.out.println(cooperating_business);
         assertNotNull(cooperating_business);
     }
 }
