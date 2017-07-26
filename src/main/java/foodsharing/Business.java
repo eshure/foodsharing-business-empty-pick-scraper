@@ -47,4 +47,12 @@ public class Business {
     public void name(String name) {
         this.name = name;
     }
+
+    public List<Calendar> open_dates() {
+        return open_dates;
+    }
+
+    public String name() {
+        return name;
+    }
 }

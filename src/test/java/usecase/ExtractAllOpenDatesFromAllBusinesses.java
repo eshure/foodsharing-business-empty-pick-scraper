@@ -4,6 +4,7 @@ import foodsharing.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import report.ReportOpenDates;
 import selenium.Browser;
 import selenium.Firefox;
 import user.Esteban;
@@ -34,25 +35,9 @@ public class ExtractAllOpenDatesFromAllBusinesses {
     }
 
     @Test
-    public void given_business_path_when_navigating_to_then_extract_all_open_dates() {
-        Business business = new Business("https://foodsharing.de/?page=fsbetrieb&id=15922");
-        browser.navigate_to(business.path());
-        BusinessPage business_page = new BusinessPage(browser);
-        business.name(business_page.name());
-        business.open_dates(business_page.displays_open_dates());
-        assertNotNull(business);
-        System.out.println(business);
-    }
-
-    @Test
     public void given_foodsharing_when_extracting_all_open_dates_from_all_businesses_then_list_open_dates_by_businesses() {
-        List<Business> businesses = business_list.get_cooperating_businesses_from_all_pages();
-        for (Business business : businesses) {
-            browser.navigate_to(business.path());
-            BusinessPage business_page = new BusinessPage(browser);
-            business.name(business_page.name());
-            business.open_dates(business_page.displays_open_dates());
-        }
-        assertFalse(businesses.isEmpty());
+        ReportOpenDates report = new ReportOpenDates(new Firefox(), new Esteban());
+        report.read_open_dates_of_all_cooperating_businesses();
+        System.out.println(report.open_dates_sorted_chronologically());
     }
 }
