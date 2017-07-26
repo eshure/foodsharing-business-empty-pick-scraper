@@ -10,9 +10,12 @@ import java.util.List;
 public class BusinessListPage extends PageObject{
 
     private static final String title = "foodsharing";
-    private static final String coorporating_link = "a.ampel.ampel-gruen";
-    private static final String tbody = "tbody";
-    private static final String tr = "tr";
+    private static final String _coorporating_link = "a.ampel.ampel-gruen";
+    private static final String _tbody = "tbody";
+    private static final String _tr = "tr";
+    private static final String _next ="span.ui-button-icon-primary.ui-icon.ui-icon-circle-arrow-e";
+    private static final String page_number = "span.pagedisplay2 > span.seite";
+    private static final String amount_of_pages = "span.pagedisplay2 > span.anz";
 
     public BusinessListPage(Browser browser) {
         super(browser);
@@ -24,17 +27,17 @@ public class BusinessListPage extends PageObject{
         return title;
     }
 
-    public boolean contains_cooperating_businesses() {
-        return has(coorporating_link);
+    boolean contains_cooperating_businesses() {
+        return has(_coorporating_link);
     }
 
-    public List<Business> get_cooperating_businesses() {
+    List<Business> get_cooperating_businesses() {
         List<Business> cooperating_businesses = new LinkedList<Business>();
-        WebElement table = findElement(tbody);
-        List<WebElement> trs = table.findElements(By.tagName(tr));
+        WebElement table = findElement(_tbody);
+        List<WebElement> trs = table.findElements(By.tagName(_tr));
         for (WebElement tr : trs) {
             try {
-                tr.findElement(By.cssSelector(coorporating_link)); // throws exception if not existant
+                tr.findElement(By.cssSelector(_coorporating_link)); // throws exception if not existant
                 String href = tr.findElement(By.cssSelector("a.linkrow.ui-corner-all")).getAttribute("href");
                 cooperating_businesses.add(new Business(href));
             } catch (Exception e) {
@@ -42,5 +45,23 @@ public class BusinessListPage extends PageObject{
             }
         }
         return cooperating_businesses;
+    }
+
+    void click_on_next_page() {
+        click_on(_next);
+    }
+
+    String displays_page() {
+        WebElement element = findElement(page_number);
+        return element.getAttribute("innerHTML");
+    }
+
+    String displays_amount_of_pages() {
+        WebElement element = findElement(amount_of_pages);
+        return element.getAttribute("innerHTML");
+    }
+
+    int amount_of_available_pages() {
+        return Integer.parseInt(displays_amount_of_pages()) - 1 ;
     }
 }
