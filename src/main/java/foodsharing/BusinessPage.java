@@ -15,10 +15,10 @@ public class BusinessPage extends PageObject{
     private static final String title = "foodsharing | Spender-Betriebe | ";
     private static final String name = "not set";
     private static final String _scrollbox = "div.field > div.ui-widget.ui-widget-content.corner-bottom.margin-bottom.ui-padding > div.slimScrollDiv";
-    private static final SimpleDateFormat date_format = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss", Locale.getDefault());
+    private static final SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
 
-    BusinessPage(Browser browser) {
+    public BusinessPage(Browser browser) {
         super(browser);
     }
 
@@ -26,19 +26,23 @@ public class BusinessPage extends PageObject{
         return browser().title();
     }
 
-    public List<Calendar> get_open_dates() {
+    public List<Calendar> displays_open_dates() {
         List<Calendar> openDates = new LinkedList();
         List<WebElement> scrollbox = findElements(_scrollbox);
-        List<WebElement> entries = scrollbox.get(0).findElements(By.cssSelector("div.element-wrapper"));
-        for (WebElement entry : entries) {
-            if (entry.getAttribute("outerHTML").contains("Mich hier eintragen")) {
-                String timestamp = entry.findElement(By.tagName("input")).getAttribute("value");
-                try {
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(date_format.parse(timestamp));// all done
-                    openDates.add(calendar);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+        if (scrollbox.isEmpty()) {
+            System.out.println(get_current_url() + ": scrollbox is empty");
+        } else {
+            List<WebElement> entries = scrollbox.get(0).findElements(By.cssSelector("div.element-wrapper"));
+            for (WebElement entry : entries) {
+                if (entry.getAttribute("outerHTML").contains("Mich hier eintragen")) {
+                    String timestamp = entry.findElement(By.tagName("input")).getAttribute("value");
+                    try {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(date_format.parse(timestamp));// all done
+                        openDates.add(calendar);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
         }
@@ -48,11 +52,11 @@ public class BusinessPage extends PageObject{
     public Business create_business() {
         Business business = new Business(get_current_url());
         business.name(name());
-        business.open_dates(get_open_dates());
+        business.open_dates(displays_open_dates());
         return business;
     }
 
-    private String name() {
+    public String name() {
         return title().replace("foodsharing | Spender-Betriebe | ", "");
     }
 }

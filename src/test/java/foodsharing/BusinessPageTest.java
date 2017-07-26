@@ -59,7 +59,7 @@ public class BusinessPageTest {
         List<Business> cooperating_businesses = business_list.get_cooperating_businesses();
         browser.navigate_to(cooperating_businesses.get(0).path());
         BusinessPage business_page = new BusinessPage(browser);
-        List<Calendar> open_dates = business_page.get_open_dates();
+        List<Calendar> open_dates = business_page.displays_open_dates();
         System.out.println(open_dates);
         assertFalse(open_dates.isEmpty());
     }

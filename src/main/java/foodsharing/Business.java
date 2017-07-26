@@ -9,15 +9,15 @@ public class Business {
     private List<Calendar> open_dates;
     private String name;
 
-    Business(String path) {
+    public Business(String path) {
         this.path = path;
     }
 
-    String path() {
+    public String path() {
         return path;
     }
 
-    void open_dates(List<Calendar> open_dates) {
+    public void open_dates(List<Calendar> open_dates) {
         this.open_dates = open_dates;
     }
 
@@ -34,11 +34,11 @@ public class Business {
     }
 
     private String open_dates_to_string() {
-        SimpleDateFormat yyyy_mm_dd = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat yyyy_mm_dd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         StringBuilder builder = new StringBuilder();
-        for (Calendar data : open_dates) {
+        for (Calendar calendar : open_dates) {
             builder
-                    .append(yyyy_mm_dd.format(data.getTime()))
+                    .append(calendar.getTime().toString())
                     .append("\n");
         }
         return builder.toString();

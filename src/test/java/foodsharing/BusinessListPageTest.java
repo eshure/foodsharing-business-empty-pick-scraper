@@ -32,15 +32,15 @@ public class BusinessListPageTest {
 
     @Test
     public void given_business_list_when_displaying_page_then_page_one_is_displayed() {
-        String page_displayed = business_list.displays_page();
-        assertEquals("1", page_displayed);
+        int page_displayed = business_list.displays_page_number();
+        assertEquals(1, page_displayed);
     }
 
     @Test
     public void given_business_list_when_click_on_next_page_then_page_two_is_displayed() {
         business_list.click_on_next_page();
-        String page_displayed = business_list.displays_page();
-        assertEquals("2", page_displayed);
+        int page_displayed = business_list.displays_page_number();
+        assertEquals(2, page_displayed);
     }
 
     @Test

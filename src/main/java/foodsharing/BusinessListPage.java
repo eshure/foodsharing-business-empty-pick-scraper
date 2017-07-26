@@ -31,7 +31,16 @@ public class BusinessListPage extends PageObject{
         return has(_coorporating_link);
     }
 
-    List<Business> get_cooperating_businesses() {
+    public List<Business> get_cooperating_businesses_from_all_pages() {
+        List<Business> cooperating_businesses_from_all_pages = new LinkedList<Business>();
+        while(displays_page_number() < amount_of_available_pages()) {
+            cooperating_businesses_from_all_pages.addAll(get_cooperating_businesses());
+            click_on_next_page();
+        }
+        return cooperating_businesses_from_all_pages;
+    }
+
+    public List<Business> get_cooperating_businesses() {
         List<Business> cooperating_businesses = new LinkedList<Business>();
         WebElement table = findElement(_tbody);
         List<WebElement> trs = table.findElements(By.tagName(_tr));
@@ -51,9 +60,9 @@ public class BusinessListPage extends PageObject{
         click_on(_next);
     }
 
-    String displays_page() {
+    int displays_page_number() {
         WebElement element = findElement(page_number);
-        return element.getAttribute("innerHTML");
+        return Integer.parseInt(element.getAttribute("innerHTML"));
     }
 
     String displays_amount_of_pages() {

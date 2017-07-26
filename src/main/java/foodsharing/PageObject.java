@@ -21,7 +21,7 @@ abstract class PageObject {
         wait = new WebDriverWait(browser.driver(), timeout_in_seconds);
     }
 
-    Browser browser() {
+    public Browser browser() {
         return browser;
     }
 
@@ -43,8 +43,13 @@ abstract class PageObject {
     private void wait_for_element(String cssSelector) {
         By by = By.cssSelector(cssSelector);
         long start_waiting = System.currentTimeMillis();
-        wait.until(ExpectedConditions.elementToBeClickable(by));
-        System.out.println("Waited for " + by + " " + (System.currentTimeMillis() - start_waiting) + " ms.");
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(by));
+            System.out.println("Waited for " + by + " " + (System.currentTimeMillis() - start_waiting) + " ms.");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println(get_current_url());
+        }
     }
 
 

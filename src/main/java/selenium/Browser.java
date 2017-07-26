@@ -23,7 +23,8 @@ public class Browser {
         return driver;
     }
 
-    public void navigate_to(String url) {
+    public Browser navigate_to(String url) {
         driver.get(url);
+        return this;
     }
 }

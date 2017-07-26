@@ -3,14 +3,14 @@ package foodsharing;
 import selenium.Browser;
 import user.User;
 
-class LoginPage extends PageObject {
+public class LoginPage extends PageObject {
 
     private static final String title = "foodsharing | Restlos glücklich!";
     private static final String input_email = "input[name='email_adress'][type='email']";
     private static final String input_password = "input[name='password'][type='password']";
     private static final String submit = "input[type='submit']";
 
-    LoginPage(Browser browser) {
+    public LoginPage(Browser browser) {
         super(browser);
     }
 
@@ -19,11 +19,11 @@ class LoginPage extends PageObject {
         return title;
     }
 
-    static String url() {
+    public static String url() {
         return "https://foodsharing.de/";
     }
 
-    DashBoard login_as(User user) {
+    public DashBoard login_as(User user) {
         System.out.println(user);
         enter_email_adress_to(user.email());
         enter_password(user.password());
