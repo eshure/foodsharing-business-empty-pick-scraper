@@ -10,7 +10,7 @@ import java.util.List;
 
 abstract class PageObject {
 
-    private static final long timeout_in_seconds = 10;
+    private static final long timeout_in_seconds = 3;
 
     private final Browser browser;
 

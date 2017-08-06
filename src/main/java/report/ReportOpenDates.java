@@ -24,10 +24,11 @@ public class ReportOpenDates {
         this.open_date_and_business = new HashMap<>();
     }
 
-    public void read_open_dates_of_all_cooperating_businesses() {
+    public ReportOpenDates read_open_dates_of_all_cooperating_businesses() {
         navigate_to_business_list();
         read_all_cooperating_businesses_paths();
         read_all_cooperating_businesses_from_path();
+        return this;
     }
 
     private void navigate_to_business_list() {
@@ -92,8 +93,33 @@ public class ReportOpenDates {
         List<Business> businesses = open_date_and_business.get(open_date);
         StringBuilder builder = new StringBuilder();
         for (Business business : businesses) {
-            builder.append(business.name() + " ");
+            builder.append(business.name() + " (" + business.path() + ") ");
         }
         return builder.toString();
+    }
+
+    public String open_dates_sorted_chronologically_after_now() {
+        create_open_date_and_business_dictionary();
+        remove_all_after_now();
+        return open_dates_sorted_chronologically_to_string();
+    }
+
+    private void remove_all_after_now() {
+        SortedSet<Calendar> open_dates = new TreeSet<>(open_date_and_business.keySet());
+        LinkedList<Calendar> before_now = new LinkedList<>();
+        Calendar now = Calendar.getInstance();
+        for(Calendar open_date : open_dates) {
+            if (open_date.before(now)) {
+                before_now.add(open_date);
+            }
+        }
+        for (Calendar open_date : before_now) {
+            open_date_and_business.remove(open_date);
+        }
+    }
+
+    public ReportOpenDates quit_browser() {
+        browser.quit();
+        return this;
     }
 }

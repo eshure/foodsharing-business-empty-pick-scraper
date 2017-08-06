@@ -48,7 +48,7 @@ public class BusinessListPageTest {
         int amount_of_pages = Integer.parseInt(business_list.displays_amount_of_pages());
         int amount_of_available_pages = business_list.amount_of_available_pages();
         int offset = amount_of_available_pages - amount_of_pages;
-        assertEquals(1, offset);
+        assertEquals(-1, offset);
     }
 
 }
